@@ -160,11 +160,11 @@ class Form_builder {
 	 * @param class string
 	 * @param rows int
 	 */
-	public function textarea($id, $name, $default = '', $class = 'input-xlarge', $rows = 5) {
+	public function textarea($id, $name, $default = '', $class = 'input-xlarge', $rows = 5, $placeholder = '') {
 		$this->base_control($id, $name);
 		
 		$readonly = ($this->_editable) ? '' : 'readonly';
-		echo '<textarea class="'. $class .'" '. $readonly .' id="'. $id .'" name="'. $id .'" rows="'. $rows .'">'. set_value($id, $default) .'</textarea>';
+		echo '<textarea class="'. $class .'" '. $readonly .' id="'. $id .'" name="'. $id .'" rows="'. $rows .'" placeholder="'. $placeholder .'">'. set_value($id, $default) .'</textarea>';
 		
 		$this->base_end();
 	}
