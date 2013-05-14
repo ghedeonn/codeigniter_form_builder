@@ -32,9 +32,9 @@ class Form_builder {
 	 * @param prepend string
 	 * @param append string
 	 */
-	public function text($id, $name, $default = '', $class = 'input-large', $placeholder = '', $prepend = '', $append = '') {
+	public function text($id, $name, $default = '', $class = 'input-large', $placeholder = '', $prepend = '', $append = '', $validation) {
 		$this->base_control($id, $name);
-		$this->_build_text($id, $default, $class, $placeholder, $prepend, $append);
+		$this->_build_text($id, $default, $class, $placeholder, $prepend, $append, false, $validation);
 		$this->base_end();
 	}
 	
@@ -299,12 +299,13 @@ class Form_builder {
 	 * private functions for building the elements.
 	 * ============================================ */
 	
-	private function _build_text($id, $default, $class, $placeholder, $prepend, $append, $is_password = false) {
+	private function _build_text($id, $default, $class, $placeholder, $prepend, $append, $is_password = false, $validation = false) {
 		$this->addon_begin($prepend, $append, $class);
 		$readonly = ($this->_editable) ? '' : 'readonly';
 		$type = ($is_password) ? 'password' : 'text';
 		$value = ($is_password) ? '' : set_value($id, $default);
 		echo '<input type="'. $type .'" '. $readonly .' placeholder="'. $placeholder .'" class="'. $class . '" name="'. $id .'" id="'. $id .'" value="'. $value .'" /> ';
+		if($validation == true) echo form_error($id);
 		$this->addon_end($prepend, $append);
 		
 	}
